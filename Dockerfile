@@ -1,12 +1,11 @@
-FROM node:lts-alpine as builder
+FROM node:alpine
 WORKDIR '/app'
 COPY ./package.json ./
 RUN npm install
 COPY . .
-EXPOSE 3030
 CMD ["npm", "run", "start"]
 
 FROM nginx
+EXPOSE 3030
+COPY ./default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app /usr/share/nginx/html
-COPY --from=builder /app/nginx-conf/default.conf /etc/nginx/conf.d/default.conf
-

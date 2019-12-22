@@ -2,15 +2,22 @@ sudo: required
 services:
   - docker
 
-deploy:
-  provider: elasticbeanstalk
-  region: "us-east-1"
-  app: "Massari-API"
-  env: "development"
-  bucket_name: "elasticbeanstalk-us-east-1-007886156173"
-  bucket_path: "Massari-API"
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: "$AWS_SECRET_KEY"
+script:
+  - docker build -t projectdiaspora/api .
+  - docker build -t projectdiaspora/nginx ./nginx
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push projectdiaspora/api
+  - docker push projectdiaspora/nginx
+
+#deploy:
+#  provider: elasticbeanstalk
+#  region: "us-east-1"
+#  app: "Massari-API"
+#  env: "development"
+#  bucket_name: "elasticbeanstalk-us-east-1-007886156173"
+#  bucket_path: "Massari-API"
+#  access_key_id: $AWS_ACCESS_KEY
+#  secret_access_key:
+#    secure: "$AWS_SECRET_KEY"
 #  on:
 #    branch: master
