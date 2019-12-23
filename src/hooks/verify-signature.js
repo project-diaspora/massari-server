@@ -8,7 +8,13 @@ module.exports = (options = {}) => {
 
     const xSignature = context.params.headers['x-massari-signature']
     const xTimestamp = context.params.headers['x-massari-timestamp']
-    const xUrl = context.path
+    let xUrl
+
+    if (context.id) {
+      xUrl = `${context.path}/${context.id}`
+    } else {
+      xUrl = `${context.path}`
+    }
 
     if (!xSignature || !xUrl || !xTimestamp) {
       logger.error('missing parrams')

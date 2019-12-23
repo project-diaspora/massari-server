@@ -17,9 +17,9 @@ module.exports = {
   },
 
   after: {
-    all: [],
+    all: [discard('_id')],
     find: [],
-    get: [discard('_id')],
+    get: [],
     create: [],
     update: [],
     patch: [],
