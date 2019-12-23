@@ -3,11 +3,11 @@ services:
   - docker
 
 script:
-  - docker build -t projectdiaspora/api .
-  - docker build -t projectdiaspora/nginx ./nginx
+  - docker build -t projectdiaspora/api-feathers .
+  - docker build -t projectdiaspora/api-nginx ./nginx
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push projectdiaspora/api
-  - docker push projectdiaspora/nginx
+  - docker push projectdiaspora/api-feathers
+  - docker push projectdiaspora/api-nginx
 
 #deploy:
 #  provider: elasticbeanstalk
