@@ -1,14 +1,15 @@
-
+const verifySignature = require('../../hooks/verify-signature');
+const { disallow, iff, isProvider } = require('feathers-hooks-common');
 
 module.exports = {
   before: {
     all: [],
-    find: [],
-    get: [],
+    find: [iff(isProvider('external'), verifySignature())],
+    get: [iff(isProvider('external'), verifySignature())],
     create: [],
-    update: [],
-    patch: [],
-    remove: []
+    update: [disallow()],
+    patch: [disallow()],
+    remove: [disallow()]
   },
 
   after: {
