@@ -1,6 +1,6 @@
 const verifySignature = require('../../hooks/verify-signature');
 const checkAddress = require('../../hooks/check-address');
-const { discard, disallow, iff, isProvider, keep } = require('feathers-hooks-common');
+const { discard, disallow, iff, isProvider } = require('feathers-hooks-common');
 
 module.exports = {
   before: {
