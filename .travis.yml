@@ -3,7 +3,7 @@ services:
   - docker
 
 script:
-  - docker build -t projectdiaspora/api-feathers .
+  - docker build -t projectdiaspora/api-feathers ./api
   - docker build -t projectdiaspora/api-nginx ./nginx
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push projectdiaspora/api-feathers

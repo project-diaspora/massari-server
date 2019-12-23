@@ -2,15 +2,31 @@ version: '3'
 services:
   nignx:
     restart: always
+    container_name: nginx
     build:
       dockerfile: Dockerfile.dev
       context: ./nginx
     ports:
-      - "3030:80"
+      - "80:80"
+    links:
+      - api:api
+    depends_on:
+      - api
+    networks:
+      - app-network
   api:
+    container_name: api
+    restart: unless-stopped
     build:
       dockerfile: Dockerfile.dev
-      context: .
+      context: ./api
+    ports:
+      - "3030:3030"
     volumes:
-    - /app/node_modules
-    - .:/app
+      - /app/node_modules
+      - ./api:/app
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
