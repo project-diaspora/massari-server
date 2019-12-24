@@ -1,8 +1,11 @@
-// Application hooks that run for every service
+const storeSignature = require('./hooks/store-signature');
+const { iff, isProvider, discard } = require('feathers-hooks-common');
 
 module.exports = {
   before: {
-    all: [],
+    all: [
+      iff(isProvider('external'), storeSignature())
+    ],
     find: [],
     get: [],
     create: [],
@@ -12,7 +15,12 @@ module.exports = {
   },
 
   after: {
-    all: [],
+    all: [
+      discard('__v'), 
+      discard('_id'),
+      discard('createdAt'),
+      discard('updatedAt'),
+    ],
     find: [],
     get: [],
     create: [],

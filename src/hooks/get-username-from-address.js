@@ -7,7 +7,7 @@ module.exports = () => {
 
     const walletAddress = context.params.walletAddress;
     try {
-      const res = await context.app.service('users').find({ query: { wallet_address: walletAddress } });
+      const res = await context.app.service('users').find({ query: { walletAddress } });
       if (!res.data[0]) {
         logger.error('no user found');
         throw new NotAuthenticated();

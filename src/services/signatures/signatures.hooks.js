@@ -1,14 +1,14 @@
-const { disallow } = require('feathers-hooks-common');
+const { iff, isProvider, discard } = require('feathers-hooks-common');
 
 module.exports = {
   before: {
-    all: [],
-    find: [disallow()],
-    get: [disallow('external')],
-    create: [disallow('external')],
-    update: [disallow()],
-    patch: [disallow()],
-    remove: [disallow()]
+    all: [discard('external')],
+    find: [],
+    get: [],
+    create: [],
+    update: [],
+    patch: [],
+    remove: []
   },
 
   after: {

@@ -3,7 +3,7 @@ const { NotAuthenticated, BadRequest } = require('@feathersjs/errors');
 const ethers = require('ethers');
 const logger = require('../logger');
 
-module.exports = () => {  
+module.exports = () => {
   return async context => {
 
     const xSignature = context.params.headers['x-massari-signature'];
@@ -17,7 +17,7 @@ module.exports = () => {
     }
 
     if (!xSignature || !xUrl || !xTimestamp) {
-      logger.error('missing parrams');
+      logger.error('missing params');
       throw new BadRequest();
     }
 

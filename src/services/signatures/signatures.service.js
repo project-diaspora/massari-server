@@ -1,10 +1,13 @@
 // Initializes the `signatures` service on path `/signatures`
 const { Signatures } = require('./signatures.class');
+const createModel = require('../../models/signatures.model');
 const hooks = require('./signatures.hooks');
 
 module.exports = function (app) {
   const options = {
-    paginate: app.get('paginate')
+    Model: createModel(app),
+    paginate: app.get('paginate'),
+    id: 'signature'
   };
 
   // Initialize our service with any options it requires

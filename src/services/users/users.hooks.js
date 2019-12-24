@@ -1,7 +1,7 @@
 const verifySignature = require('../../hooks/verify-signature');
 const getUsernameFromAddress = require('../../hooks/get-username-from-address');
 const verifyAddressInRequestData = require('../../hooks/verify-address-in-request-data');
-const { discard, disallow, iff, isProvider } = require('feathers-hooks-common');
+const { disallow, iff, isProvider } = require('feathers-hooks-common');
 
 module.exports = {
   before: {
@@ -21,7 +21,7 @@ module.exports = {
   },
 
   after: {
-    all: [discard('_id')],
+    all: [],
     find: [],
     get: [],
     create: [],
