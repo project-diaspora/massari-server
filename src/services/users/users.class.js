@@ -8,4 +8,9 @@ exports.Users = class Users extends Service {
       this.Model = db.collection('users');
     });
   }
+
+  create = async (data, params) => {
+    data.username = data.username.toLowercase()
+    return super.create(data, params)
+  }
 };
