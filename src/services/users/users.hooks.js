@@ -1,5 +1,6 @@
 const verifySignature = require('../../hooks/verify-signature');
-const checkAddress = require('../../hooks/check-address');
+const getUsernameFromAddress = require('../../hooks/get-username-from-address');
+const verifyAddressInRequestData = require('../../hooks/verify-address-in-request-data');
 const { discard, disallow, iff, isProvider } = require('feathers-hooks-common');
 
 module.exports = {
@@ -8,9 +9,12 @@ module.exports = {
     find: [disallow('external')],
     get: [iff(isProvider('external'), [
       verifySignature(),
-      checkAddress()
+      getUsernameFromAddress()
     ])],
-    create: [verifySignature()],
+    create: [
+      verifySignature(),
+      verifyAddressInRequestData()
+    ],
     update: [disallow()],
     patch: [disallow()],
     remove: [disallow()]
