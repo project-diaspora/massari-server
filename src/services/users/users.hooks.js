@@ -21,7 +21,7 @@ module.exports = {
   },
 
   after: {
-    all: [],
+    all: [discard('_id')],
     find: [],
     get: [],
     create: [],
