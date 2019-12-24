@@ -1,6 +1,6 @@
 {
   "name": "massari-server",
-  "description": "",
+  "description": "A social network for money",
   "version": "0.1.0",
   "homepage": "",
   "main": "src",

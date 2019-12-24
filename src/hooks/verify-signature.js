@@ -21,14 +21,14 @@ module.exports = () => {
       throw new BadRequest();
     }
 
-    context = await checkSignature({ context, xSignature, xUrl, xTimestamp });
+    context = await getAddressFromSignature({ context, xSignature, xUrl, xTimestamp });
     verifyTimestamp({ xTimestamp });
 
     return context;
   };
 };
 
-const checkSignature = async ({ context, xSignature, xUrl, xTimestamp }) => {
+const getAddressFromSignature = async ({ context, xSignature, xUrl, xTimestamp }) => {
   const signedMessage = `${xUrl}|${xTimestamp}`;
   const signedWithWallet = ethers.utils.verifyMessage(signedMessage, xSignature);
   context.params.walletAddress = signedWithWallet;
