@@ -1,15 +1,20 @@
 {
   "name": "massari-server",
-  "description": "A social network for money",
+  "description": "The API for a social network for money",
   "version": "0.1.0",
   "homepage": "",
   "main": "src",
   "keywords": [
     "feathers"
   ],
+  "license": "MIT",
   "author": {
     "name": "msrijai",
     "email": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/project-diaspora/massari-server.git"
   },
   "contributors": [],
   "bugs": {},
@@ -23,11 +28,11 @@
     "npm": ">= 3.0.0"
   },
   "scripts": {
-    "test": "npm run eslint && npm run jest",
+    "test": "npm run eslint && npm run mocha",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
-    "dev": "nodemon src/",
     "start": "node src/",
-    "jest": "jest  --forceExit"
+    "clean": "shx rm -rf test/data/",
+    "mocha": "npm run clean && NODE_ENV=test mocha test/ --recursive --exit"
   },
   "dependencies": {
     "@feathersjs/configuration": "^4.4.3",
@@ -49,7 +54,8 @@
   "devDependencies": {
     "axios": "^0.19.0",
     "eslint": "^6.8.0",
-    "jest": "^24.9.0",
-    "nodemon": "^2.0.2"
+    "mocha": "^6.2.2",
+    "nodemon": "^2.0.2",
+    "shx": "^0.3.2"
   }
 }

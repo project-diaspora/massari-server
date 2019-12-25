@@ -1,4 +1,4 @@
-const { iff, isProvider, discard } = require('feathers-hooks-common');
+const { discard } = require('feathers-hooks-common');
 
 module.exports = {
   before: {

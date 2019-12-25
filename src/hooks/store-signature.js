@@ -8,9 +8,9 @@ module.exports = () => {
     const xSignature = context.params.headers['x-massari-signature'];
 
     try {
-      await context.app.service('signatures').create({ signature: xSignature })
+      await context.app.service('signatures').create({ signature: xSignature });
     } catch (err) {
-      logger.error(err)
+      logger.error(err);
       throw new Conflict();
     }
 
