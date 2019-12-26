@@ -1,9 +1,8 @@
 const verifySignature = require('../../hooks/verify-signature');
 const getUsernameFromAddress = require('../../hooks/get-username-from-address');
+const restrictToUser = require('../../hooks/restrict-to-user');
 const { disallow, iff, isProvider } = require('feathers-hooks-common');
 const { setField } = require('feathers-authentication-hooks');
-const { BadRequest } = require('@feathersjs/errors');
-const logger = require('../../logger');
 
 module.exports = {
   before: {
@@ -23,12 +22,7 @@ module.exports = {
       iff(isProvider('external'), [
         verifySignature(),
         getUsernameFromAddress(),
-        context => {
-          if (context.params.user.username !== context.data.fromUsername) {
-            logger.error('creating a transaction for another user');
-            throw new BadRequest();
-          }
-        }
+        restrictToUser()
       ])
     ],
     update: [disallow()],

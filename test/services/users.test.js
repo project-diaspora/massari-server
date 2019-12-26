@@ -113,7 +113,7 @@ describe('\'users\' service', async () => {
 
     });
 
-    it('creates a transaction for another user', async () => {
+    it('creates a transaction for another user should fail', async () => {
       xPath = 'transactions';
       xSignature = await utils.signMessage(`${xPath}|${xTimestamp}`, mnemonic);
 
@@ -129,7 +129,8 @@ describe('\'users\' service', async () => {
           currency: 'DAI',
           transactionHash: '0xhash1238',
           note: 'a message'
-        }, params);        
+        }, params);
+        assert.fail();    
       } catch (err) {
         assert(err);
       }
