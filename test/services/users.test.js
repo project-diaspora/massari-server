@@ -19,6 +19,7 @@ describe('\'users\' service', async () => {
         username: 'michaeljordan',
         walletAddress: '0x123'
       }, params);
+      assert.fail();
     } catch(err) {
       assert(err);
     }
@@ -27,6 +28,7 @@ describe('\'users\' service', async () => {
   it('tries to get a user without proper headers', async () => {
     try {
       await app.service('users').get('michaeljordan', params);
+      assert.fail();
     } catch (err) {
       assert(err);
     }

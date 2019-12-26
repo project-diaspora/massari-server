@@ -5,11 +5,6 @@ const mongoose = require('mongoose');
 
 describe('Feathers application tests', () => {
 
-  before(async () => {
-    await mongoose.connect(config.mongodb, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true });
-    await mongoose.connection.db.dropDatabase();
-  });
-
   it('populates two new users', async () => {
     const userA = await app.service('users').create({
       username: 'user_a',
