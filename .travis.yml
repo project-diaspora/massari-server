@@ -9,4 +9,4 @@ before_script:
   - npm install -g npm@latest
 services:
   - mongodb
-script: npm test
+script: npm run test:ci

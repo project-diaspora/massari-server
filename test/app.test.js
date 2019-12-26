@@ -1,9 +1,12 @@
 const assert = require('assert');
 const app = require('../src/app');
-const config = require('../config/test');
-const mongoose = require('mongoose');
+const mongooseClient = app.get('mongooseClient');
 
 describe('Feathers application tests', () => {
+
+  before(async () => {
+    await mongooseClient.connection.dropDatabase();
+  });
 
   it('populates two new users', async () => {
     const userA = await app.service('users').create({
