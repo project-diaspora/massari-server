@@ -1,66 +1,63 @@
-const axios = require('axios');
-const url = require('url');
+const assert = require('assert');
 const app = require('../src/app');
+const mongooseClient = app.get('mongooseClient');
 
-const hostname = app.get('host') || 'localhost';
-const port = app.get('port') || 8998;
-const getUrl = pathname => url.format({
-  protocol: 'http',
-  hostname,
-  port,
-  pathname
-});
+describe('Feathers application tests', () => {
 
-describe('Feathers application tests (with jest)', () => {
-  let server;
-
-  beforeAll(done => {
-    server = app.listen(port, hostname);
-    server.once('listening', () => done());
+  before(async () => {
+    await mongooseClient.connection.dropDatabase();
   });
 
-  afterAll(done => {
-    server.close(done);
-  });
-
-  it('starts and shows the index page', async () => {
-    expect.assertions(1);
-
-    const { data } = await axios.get(getUrl());
-
-    expect(data.indexOf('<html lang="en">')).not.toBe(-1);
-  });
-
-  describe('404', () => {
-    it('shows a 404 HTML page', async () => {
-      expect.assertions(2);
-      try {
-        await axios.get(getUrl('path/to/nowhere'), {
-          headers: {
-            'Accept': 'text/html'
-          }
-        });
-      } catch (error) {
-        const { response } = error;
-
-        expect(response.status).toBe(404);
-        expect(response.data.indexOf('<html>')).not.toBe(-1);
-      }
+  it('populates two new users', async () => {
+    const userA = await app.service('users').create({
+      username: 'user_a',
+      walletAddress: '0x123'
     });
 
-    it('shows a 404 JSON error without stack trace', async () => {
-      expect.assertions(4);
-      
-      try {
-        await axios.get(getUrl('path/to/nowhere'));
-      } catch (error) {
-        const { response } = error;
-
-        expect(response.status).toBe(404);
-        expect(response.data.code).toBe(404);
-        expect(response.data.message).toBe('Page not found');
-        expect(response.data.name).toBe('NotFound');
-      }
+    const userB = await app.service('users').create({
+      username: 'user_b',
+      walletAddress: '0x124'
     });
+
+    assert.equal(userA.username, 'user_a');
+    assert.equal(userB.username, 'user_b');
+  });
+
+  it('populates two transactions for user_a', async () => {
+    const transactionA = await app.service('transactions').create({
+      fromAddress: '0x123',
+      fromUsername: 'user_a',
+      toAddress: '0x124',
+      toUsername: 'user_b',
+      amountInBasicUnit: '1.235012315678987623',
+      currency: 'DAI',
+      transactionHash: '0xhash1234',
+      note: 'a message'
+    });
+
+    const transactionB = await app.service('transactions').create({
+      fromAddress: '0x123',
+      fromUsername: 'user_a',
+      toAddress: '0x125',
+      amountInBasicUnit: '2.235012315678987623',
+      currency: 'DAI',
+      transactionHash: '0xhash1235',
+      note: 'a message'
+    });
+
+    assert.equal(transactionA.fromUsername, 'user_a');
+    assert.equal(transactionB.transactionHash, '0xhash1235');
+  });
+
+  it('registered the \'transactions\' service', () => {
+    const service = app.service('transactions');
+
+    assert.ok(service, 'Registered the service');
+  });
+
+  it('registered the \'users\' service', () => {
+    const service = app.service('users');
+
+    assert.ok(service, 'Registered the service');
   });
 });

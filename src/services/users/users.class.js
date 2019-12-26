@@ -1,16 +1,10 @@
-const { Service } = require('feathers-mongodb');
+const { Service } = require('feathers-mongoose');
 
 exports.Users = class Users extends Service {
-  constructor(options, app) {
-    super(options);
-    
-    app.get('mongoClient').then(db => {
-      this.Model = db.collection('users');
-    });
+
+  create(data, params) {
+    data.username = data.username.toLowerCase();
+    return super.create(data, params);
   }
 
-  create = async (data, params) => {
-    data.username = data.username.toLowercase()
-    return super.create(data, params)
-  }
 };
