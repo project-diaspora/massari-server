@@ -5,8 +5,8 @@ const logger = require('../logger');
 module.exports = () => {
   return async context => {
 
-    if (context.params.data.walletAddress !== context.params.walletAddress) {
-      logger.error('wallet address in data is different than signature');
+    if (!context.data || !context.data.walletAddress ||  context.data.walletAddress !== context.params.walletAddress) {
+      logger.error('wallet address in data not found or is different than signature');
       throw new BadRequest();
     }
 

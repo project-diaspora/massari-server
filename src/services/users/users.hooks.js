@@ -11,10 +11,10 @@ module.exports = {
       verifySignature(),
       getUsernameFromAddress()
     ])],
-    create: [
+    create: [iff(isProvider('external'), [
       verifySignature(),
       verifyAddressInRequest()
-    ],
+    ])],
     update: [disallow()],
     patch: [disallow()],
     remove: [disallow()]

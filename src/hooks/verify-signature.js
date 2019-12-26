@@ -6,17 +6,17 @@ const logger = require('../logger');
 module.exports = () => {
   return async context => {
 
-    const xSignature = context.params.headers['x-massari-signature'];
-    const xTimestamp = context.params.headers['x-massari-timestamp'];
-    let xUrl;
+    let xSignature, xTimestamp, xUrl;
 
-    if (context.id) {
-      xUrl = `${context.path}/${context.id}`;
-    } else {
-      xUrl = `${context.path}`;
-    }
-
-    if (!xSignature || !xUrl || !xTimestamp) {
+    try {
+      xSignature = context.params.headers['x-massari-signature'];
+      xTimestamp = context.params.headers['x-massari-timestamp'];
+      if (context.id) {
+        xUrl = `${context.path}/${context.id}`;
+      } else {
+        xUrl = `${context.path}`;
+      }
+    } catch (err) {
       logger.error('missing params');
       throw new BadRequest();
     }
