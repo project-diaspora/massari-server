@@ -25,4 +25,4 @@ deploy:
   bucket: "massari-development-api-build-artifacts"
   skip_cleanup: true
   on:
-    branch: travis-cicd
+    branch: master
