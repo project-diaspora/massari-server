@@ -1,15 +1,20 @@
 {
   "name": "massari-server",
-  "description": "",
+  "description": "The API for a social network for money",
   "version": "0.1.0",
   "homepage": "",
   "main": "src",
   "keywords": [
     "feathers"
   ],
+  "license": "MIT",
   "author": {
     "name": "msrijai",
     "email": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/project-diaspora/massari-server.git"
   },
   "contributors": [],
   "bugs": {},
@@ -23,32 +28,35 @@
     "npm": ">= 3.0.0"
   },
   "scripts": {
-    "test": "npm run eslint && npm run jest",
-    "eslint": "eslint src/. test/. --config .eslintrc.json",
     "dev": "nodemon src/",
+    "test": "npm run eslint && NODE_ENV=dev npm run mocha",
+    "eslint": "eslint src/. test/. --config .eslintrc.json",
     "start": "node src/",
-    "jest": "jest  --forceExit"
+    "mocha": "mocha test/ --recursive --exit",
+    "test:ci": "npm run eslint && NODE_ENV=test npm run mocha"
   },
   "dependencies": {
     "@feathersjs/configuration": "^4.4.3",
     "@feathersjs/errors": "^4.4.3",
     "@feathersjs/express": "^4.4.3",
     "@feathersjs/feathers": "^4.4.3",
-    "@feathersjs/socketio": "^4.4.3",
     "@feathersjs/transport-commons": "^4.4.3",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
-    "feathers-mongodb": "^6.1.0",
+    "ethers": "^4.0.41",
+    "feathers-authentication-hooks": "^1.0.1",
+    "feathers-hooks-common": "^4.20.7",
+    "feathers-mongoose": "^8.1.1",
     "helmet": "^3.21.2",
-    "mongodb": "^3.4.1",
     "mongodb-core": "^3.2.7",
+    "mongoose": "^5.8.3",
     "serve-favicon": "^2.5.0",
     "winston": "^3.2.1"
   },
   "devDependencies": {
     "axios": "^0.19.0",
     "eslint": "^6.8.0",
-    "jest": "^24.9.0",
+    "mocha": "^6.2.2",
     "nodemon": "^2.0.2"
   }
 }
