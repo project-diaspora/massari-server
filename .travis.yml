@@ -10,3 +10,19 @@ before_script:
 services:
   - mongodb
 script: npm run test:ci
+
+before_deploy:
+  - npm install
+  - zip -r build.zip .
+  - mkdir build
+  - mv build.zip build/
+
+deploy:
+  provider: s3
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  local_dir: build
+  bucket: "massari-development-api-build-artifacts"
+  skip_cleanup: true
+  on:
+    branch: master
