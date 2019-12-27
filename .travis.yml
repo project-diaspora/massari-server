@@ -12,7 +12,7 @@ services:
 script: npm run test:ci
 
 before_deploy:
-  - npm ci
+  - npm install
   - zip -r build.zip .
 
 deploy:
