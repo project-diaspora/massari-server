@@ -21,6 +21,6 @@ deploy:
   secret_access_key: $AWS_SECRET_KEY
   file: build.zip
   bucket: "massari-development-api-build-artifacts"
-  skip_cleanup: false
+  skip_cleanup: true
   on:
     branch: travis-cicd
