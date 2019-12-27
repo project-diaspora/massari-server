@@ -1,45 +1,27 @@
-# testfeathers
+# Project Diaspora
 
-> 
+Project Diaspora is a peer-to-peer payments network that allows a diaspora to send money back to their native country without tying that money to a local bank account. In a world where capital controls have become normalized, we'd like to make it possible for locals to freely use their money.
 
-## About
+## Download Links
 
-This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
+Project Diaspora is soon to be available for both Android and iOS.
 
-## Getting Started
+# Features
 
-Getting up and running is as easy as 1, 2, 3.
+Project Diaspora functions very similarly to a typical banking app but without many of the restrictions. Supported transactions in DAI.
 
-1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
-2. Install your dependencies
+1. Add money to account
+2. Send money to friends and family
 
-    ```
-    cd path/to/testfeathers
-    npm install
-    ```
-
-3. Start your app
-
-    ```
-    npm start
-    ```
-
-## Testing
-
-Simply run `npm test` and all your tests in the `test/` directory will be run.
-
-## Scaffolding
-
-Feathers has a powerful command line interface. Here are a few things it can do:
+## Build Instructions
 
 ```
-$ npm install -g @feathersjs/cli          # Install Feathers CLI
-
-$ feathers generate service               # Generate a new Service
-$ feathers generate hook                  # Generate a new Hook
-$ feathers help                           # Show all commands
+git clone https://github.com/project-diaspora/massari-server.git
+cd massari-server/
+npm install
+npm start
 ```
 
-## Help
+## Contribute
 
-For more information on all the things you can do with Feathers visit [docs.feathersjs.com](http://docs.feathersjs.com).
+To contribute, join the conversation on [Discord](https://discord.gg/gNdnuzr) first!

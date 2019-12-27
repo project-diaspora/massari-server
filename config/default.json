@@ -6,5 +6,5 @@
     "default": 10,
     "max": 50
   },
-  "mongodb": "mongodb+srv://admin:admin@cluster0-w6dpi.mongodb.net/test"
+  "mongodb": "mongodb+srv://staging:HKrpVZiyus52tq1e@cluster0-w6dpi.mongodb.net/staging"
 }

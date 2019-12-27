@@ -1,10 +1,13 @@
 // Initializes the `transactions` service on path `/transactions`
 const { Transactions } = require('./transactions.class');
+const createModel = require('../../models/transactions.model');
 const hooks = require('./transactions.hooks');
 
 module.exports = function (app) {
   const options = {
-    paginate: app.get('paginate')
+    Model: createModel(app),
+    paginate: app.get('paginate'),
+    id: 'transactionHash'
   };
 
   // Initialize our service with any options it requires

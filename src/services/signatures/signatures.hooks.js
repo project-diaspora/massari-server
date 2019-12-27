@@ -1,11 +1,8 @@
-const storeSignature = require('./hooks/store-signature');
-const { iff, isProvider, discard } = require('feathers-hooks-common');
+const { discard } = require('feathers-hooks-common');
 
 module.exports = {
   before: {
-    all: [
-      iff(isProvider('external'), storeSignature())
-    ],
+    all: [discard('external')],
     find: [],
     get: [],
     create: [],
@@ -15,12 +12,7 @@ module.exports = {
   },
 
   after: {
-    all: [
-      discard('__v'), 
-      discard('_id'),
-      discard('createdAt'),
-      discard('updatedAt'),
-    ],
+    all: [],
     find: [],
     get: [],
     create: [],
