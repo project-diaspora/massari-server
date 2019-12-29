@@ -7,4 +7,17 @@ exports.Users = class Users extends Service {
     return super.create(data, params);
   }
 
+  find(params) {
+
+    if (params.provider) {
+      params = { 
+        query: {
+          walletAddress: params.walletAddress
+        }
+      };
+    }
+
+    return super.find(params);
+  }
+
 };

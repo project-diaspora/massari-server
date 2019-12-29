@@ -72,7 +72,7 @@ describe('\'users\' service', async () => {
 
       const user = await app.service('users').create({
         username,
-        walletAddress: walletAddress
+        walletAddress
       }, params);
 
       assert.ok(user.walletAddress, walletAddress);
@@ -147,6 +147,18 @@ describe('\'users\' service', async () => {
 
       assert.ok(transactions.total === 1);
       assert.equal(transactions.data[0].transactionHash, '0xhash1236');
+    });
+
+    it('logs in', async () => {
+      xPath = 'users';
+      xSignature = await utils.signMessage(`${xPath}|${xTimestamp}`, mnemonic);
+
+      params.headers['x-massari-signature'] = xSignature;
+      params.headers['x-massari-timestamp'] = xTimestamp;
+
+      const userInfo = await app.service('users').find(params);
+
+      assert.equal(userInfo.data[0].username, username);
     });
   });
 
