@@ -6,15 +6,23 @@ const { disallow, iff, isProvider } = require('feathers-hooks-common');
 module.exports = {
   before: {
     all: [],
-    find: [disallow('external')],
-    get: [iff(isProvider('external'), [
-      verifySignature(),
-      getUsernameFromAddress()
-    ])],
-    create: [iff(isProvider('external'), [
-      verifySignature(),
-      verifyAddressInRequest()
-    ])],
+    find: [
+      iff(isProvider('external'), [
+        verifySignature()
+      ])
+    ],
+    get: [
+      iff(isProvider('external'), [
+        verifySignature(),
+        getUsernameFromAddress()
+      ])
+    ],
+    create: [
+      iff(isProvider('external'), [
+        verifySignature(),
+        verifyAddressInRequest()
+      ])
+    ],
     update: [disallow()],
     patch: [disallow()],
     remove: [disallow()]
