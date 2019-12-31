@@ -31,7 +31,7 @@
     "dev": "nodemon src/",
     "test": "npm run eslint && NODE_ENV=dev npm run mocha",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
-    "start": "node src/",
+    "start": "DISCORD_WEBHOOK_URL node src/",
     "mocha": "mocha test/ --recursive --exit",
     "test:ci": "npm run eslint && NODE_ENV=test npm run mocha"
   },
