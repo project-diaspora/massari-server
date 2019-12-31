@@ -12,10 +12,14 @@ const logger = createLogger({
   ),
   transports: [
     new transports.Console(),
-    new DiscordTransport({
-      webhook: app.get('discordWebhookUrl'),
-    })
   ],
 });
+
+if (process.env.NODE_ENV !== 'test') {
+  logger.add(new DiscordTransport({
+    webhook: app.get('discordWebhookUrl'),
+  })
+  );
+}
 
 module.exports = logger;
