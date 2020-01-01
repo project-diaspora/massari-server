@@ -10,12 +10,14 @@ describe('Feathers application tests', () => {
 
   it('populates two new users', async () => {
     const userA = await app.service('users').create({
-      username: 'user_a',
+      username: 'user_a'
+    }, {
       walletAddress: '0x123'
     });
 
     const userB = await app.service('users').create({
-      username: 'user_b',
+      username: 'user_b'
+    }, {
       walletAddress: '0x124'
     });
 
