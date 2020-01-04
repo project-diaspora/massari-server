@@ -5,9 +5,6 @@
     "watch": true,
     "script": "index.js",
     "sourceDir": "/var/www/html/massari-server/src",
-    "logFile": "/var/log/forever/forever.log",
-    "outFile": "/var/log/forever/out.log",
-    "errFile": "/var/log/forever/error.log",
     "args": ["--port", "3030", "--ip", "127.0.0.1"]
   }
 
