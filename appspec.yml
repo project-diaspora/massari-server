@@ -14,10 +14,10 @@ hooks:
       runas: root
       timeout: 60
 
-permissions:
-  - object: /usr/src/massari-server/scripts
-    pattern: "*.sh"
-    owner: root
-    mode: 777
-    type:
-      - file
+#permissions:
+#  - object: /usr/src/massari-server/scripts
+#    pattern: "*.sh"
+#    owner: root
+#    mode: 777
+#    type:
+#      - file
