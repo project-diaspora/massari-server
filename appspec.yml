@@ -15,8 +15,8 @@ hooks:
       timeout: 60
 
 permissions:
-  - object: /usr/src/massari-server/scripts
+  - object: /usr/src/massari-server/scripts/start_server.sh
     owner: root
-    mode: 777
+    mode: 644
     type:
-      - directory
+      - file
