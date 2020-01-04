@@ -2,7 +2,14 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /usr/src/massari-server
+    destination: /var/www/html
+permissions:
+  - object: /var/www/html/massari-server/srcipts
+    pattern: "*.sh"
+    owner: root
+    mode: 777
+    type:
+      - file
 hooks:
   BeforeInstall:
     - location: scripts/install_dependencies.sh
