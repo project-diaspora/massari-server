@@ -4,5 +4,4 @@
 #          Start the node server
 # ------------------------------------------------------------------
 cd /usr/src/massari-server && sudo npm install forever --global
-#forever start src/index.js
-forever start -c "npm start"
+DISCORD_WEBHOOK_URL=$DISCORD_WEBHOOK_URL forever start src/index.js
