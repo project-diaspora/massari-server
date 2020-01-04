@@ -71,8 +71,7 @@ describe('\'users\' service', async () => {
       username = `user_${Date.now()}`;
 
       const user = await app.service('users').create({
-        username,
-        walletAddress
+        username
       }, params);
 
       assert.ok(user.walletAddress, walletAddress);

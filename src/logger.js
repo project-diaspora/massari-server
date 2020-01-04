@@ -15,7 +15,7 @@ const logger = createLogger({
   ],
 });
 
-if (process.env.NODE_ENV !== 'test') {
+if (!['test', 'dev'].includes(process.env.NODE_ENV)) {
   logger.add(new DiscordTransport({
     webhook: app.get('discordWebhookUrl'),
   })
