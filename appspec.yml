@@ -2,9 +2,9 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /var/www/html
+    destination: /var/www/html/massari-server
 permissions:
-  - object: /var/www/html/massari-server/srcipts
+  - object: /var/www/html/massari-server/scripts
     pattern: "*.sh"
     owner: root
     mode: 777
