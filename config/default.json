@@ -6,6 +6,9 @@
     "default": 10,
     "max": 50
   },
-  "mongodb": "mongodb+srv://staging:HKrpVZiyus52tq1e@cluster0-w6dpi.mongodb.net/staging",
+  "mongodbDb": "MONGODB_DB",
+  "mongodbCluster": "MONGODB_CLUSTER",
+  "mongodbUsername": "MONGODB_USERNAME",
+  "mongodbPassword": "MONGODB_PASSWORD",
   "discordWebhookUrl": "DISCORD_WEBHOOK_URL"
 }
