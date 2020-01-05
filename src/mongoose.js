@@ -2,8 +2,11 @@ const mongoose = require('mongoose');
 const logger = require('./logger');
 
 module.exports = function (app) {
+
+  const mongodbUrl = `mongodb+srv://${app.get('mongodbUsername')}:${app.get('mongodbPassword')}@${app.get('mongodbCluster')}/${app.get('mongodbDb')}`;
+
   mongoose.connect(
-    app.get('mongodb'),
+    mongodbUrl,
     { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true}
   ).catch(err => {
     logger.error(err);
