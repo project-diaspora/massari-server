@@ -11,10 +11,6 @@ module.exports = {
       iff(isProvider('external'), [
         verifySignature(),
         getUsernameFromAddress(),
-        setField({
-          from: 'params.user.username',
-          as: 'params.query.fromUsername'
-        })
       ])
     ],
     get: [disallow('external')],
