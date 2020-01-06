@@ -1,9 +1,19 @@
 const { Service } = require('feathers-mongoose');
 
 exports.Transactions = class Transactions extends Service {
-  
-  find(params) {
 
+  create(data, params) {
+    if (params.provider) {
+      data = {
+        ...data,
+        fromUsername: params.user.username,
+        fromAddress: params.user.walletAddress
+      };
+    }
+    return super.create(data, params);
+  }
+
+  find(params) {
     if (params.provider) {
       params = {
         query: {
@@ -14,7 +24,6 @@ exports.Transactions = class Transactions extends Service {
         }
       };
     }
-
     return super.find(params);
   }
   
