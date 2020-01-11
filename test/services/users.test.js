@@ -68,7 +68,7 @@ describe('\'users\' service', async () => {
 
       params.headers['x-massari-signature'] = xSignature;
       params.headers['x-massari-timestamp'] = xTimestamp;
-      username = `user_${Date.now()}`;
+      username = `user${Date.now()}`;
 
       const user = await app.service('users').create({
         username
@@ -78,15 +78,15 @@ describe('\'users\' service', async () => {
     });
 
     it('gets a pre-created user', async () => {
-      xPath = 'users/user_a';
+      xPath = 'users/usera';
       xSignature = await utils.signMessage(`${xPath}|${xTimestamp}`, mnemonic);
 
       params.headers['x-massari-signature'] = xSignature;
       params.headers['x-massari-timestamp'] = xTimestamp;
 
-      const userA = await app.service('users').get('user_a', params);
+      const userA = await app.service('users').get('usera', params);
 
-      assert.ok(userA.username, 'user_a');
+      assert.ok(userA.username, 'usera');
 
     });
 
@@ -122,7 +122,7 @@ describe('\'users\' service', async () => {
       try {
         await app.service('transactions').create({
           fromAddress: walletAddress,
-          fromUsername: 'user_a',
+          fromUsername: 'usera',
           toAddress: '0x126',
           amountInBasicUnit: '2.235012315678987623',
           currency: 'DAI',

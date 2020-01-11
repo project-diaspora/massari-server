@@ -10,27 +10,27 @@ describe('Feathers application tests', () => {
 
   it('populates two new users', async () => {
     const userA = await app.service('users').create({
-      username: 'user_a'
+      username: 'usera'
     }, {
       walletAddress: '0x123'
     });
 
     const userB = await app.service('users').create({
-      username: 'user_b'
+      username: 'userb'
     }, {
       walletAddress: '0x124'
     });
 
-    assert.equal(userA.username, 'user_a');
-    assert.equal(userB.username, 'user_b');
+    assert.equal(userA.username, 'usera');
+    assert.equal(userB.username, 'userb');
   });
 
-  it('populates two transactions for user_a', async () => {
+  it('populates two transactions for usera', async () => {
     const transactionA = await app.service('transactions').create({
       fromAddress: '0x123',
-      fromUsername: 'user_a',
+      fromUsername: 'usera',
       toAddress: '0x124',
-      toUsername: 'user_b',
+      toUsername: 'userb',
       amountInBasicUnit: '1.235012315678987623',
       currency: 'DAI',
       transactionHash: '0xhash1234',
@@ -39,7 +39,7 @@ describe('Feathers application tests', () => {
 
     const transactionB = await app.service('transactions').create({
       fromAddress: '0x123',
-      fromUsername: 'user_a',
+      fromUsername: 'usera',
       toAddress: '0x125',
       amountInBasicUnit: '2.235012315678987623',
       currency: 'DAI',
@@ -47,7 +47,7 @@ describe('Feathers application tests', () => {
       note: 'a message'
     });
 
-    assert.equal(transactionA.fromUsername, 'user_a');
+    assert.equal(transactionA.fromUsername, 'usera');
     assert.equal(transactionB.transactionHash, '0xhash1235');
   });
 
