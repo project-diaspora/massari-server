@@ -8,8 +8,4 @@ describe('\'transactions\' service', () => {
 
     assert.ok(service, 'Registered the service');
   });
-
-  // it('creates a transaction', () => {
-
-  // })
 });
