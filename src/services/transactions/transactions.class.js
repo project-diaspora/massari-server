@@ -19,7 +19,9 @@ exports.Transactions = class Transactions extends Service {
         query: {
           $or: [
             { fromAddress: params.user.walletAddress },
-            { toAddress: params.user.walletAddress }
+            { toAddress: params.user.walletAddress },
+            { fromUsername: params.user.username },
+            { toUsername: params.user.username }
           ]
         }
       };
