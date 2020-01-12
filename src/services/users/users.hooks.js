@@ -8,7 +8,11 @@ module.exports = {
     all: [],
     find: [
       iff(isProvider('external'), [
-        verifySignature()
+        verifySignature(),
+        context => {
+          logger.info(`${context.result.username} logging in with recovery phrase`);
+          return context;
+        }
       ])
     ],
     get: [
@@ -33,12 +37,7 @@ module.exports = {
 
   after: {
     all: [],
-    find: [
-      context => {
-        logger.info(`${context.result.username} logged in with recovery phrase`);
-        return context;
-      }
-    ],
+    find: [],
     get: [],
     create: [
       context => {
