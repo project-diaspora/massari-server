@@ -10,7 +10,7 @@ module.exports = () => {
     try {
       await context.app.service('signatures').create({ signature: xSignature });
     } catch (err) {
-      logger.error(err);
+      logger.error('siganture already used');
       throw new BadRequest('bad signature');
     }
 

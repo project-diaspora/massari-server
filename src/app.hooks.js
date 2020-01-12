@@ -1,5 +1,6 @@
 const storeSignature = require('./hooks/store-signature');
 const { iff, isProvider, discard } = require('feathers-hooks-common');
+const logger = require('./logger');
 
 module.exports = {
   before: {
@@ -30,7 +31,9 @@ module.exports = {
   },
 
   error: {
-    all: [],
+    all: [
+      error => logger.log('error', error)
+    ],
     find: [],
     get: [],
     create: [],
