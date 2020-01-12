@@ -1,6 +1,7 @@
 const verifySignature = require('../../hooks/verify-signature');
 const getUsernameFromAddress = require('../../hooks/get-username-from-address');
 const { disallow, iff, isProvider } = require('feathers-hooks-common');
+const logger = require('../../logger');
 
 module.exports = {
   before: {
@@ -13,7 +14,11 @@ module.exports = {
     get: [
       iff(isProvider('external'), [
         verifySignature(),
-        getUsernameFromAddress()
+        getUsernameFromAddress(),
+        context => {
+          logger.info(`${context.params.user.username} searched for ${context.id}`);
+          return context;
+        }
       ])
     ],
     create: [
@@ -28,9 +33,19 @@ module.exports = {
 
   after: {
     all: [],
-    find: [],
+    find: [
+      context => {
+        logger.info(`${context.result.username} logged in with recovery phrase`);
+        return context;
+      }
+    ],
     get: [],
-    create: [],
+    create: [
+      context => {
+        logger.info(`${context.result.username} created an account`);
+        return context;
+      }
+    ],
     update: [],
     patch: [],
     remove: []

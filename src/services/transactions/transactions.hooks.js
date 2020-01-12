@@ -1,6 +1,7 @@
 const verifySignature = require('../../hooks/verify-signature');
 const getUsernameFromAddress = require('../../hooks/get-username-from-address');
 const { disallow, iff, isProvider } = require('feathers-hooks-common');
+const logger = require('../../logger');
 
 module.exports = {
   before: {
@@ -27,7 +28,12 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [
+      context => {
+        logger.info(`${context.params.user.username} created a transaction`);
+        return context;
+      }
+    ],
     update: [],
     patch: [],
     remove: []
